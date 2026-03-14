@@ -48,6 +48,7 @@ export async function onRequestPost(context) {
     };
 
     console.log(`[API] Attempting worker dispatch to: ${workerUrl}`);
+    console.log(`[API] Payload:`, JSON.stringify(payload));
 
     const workerResponse = await fetch(workerUrl, {
       method: "POST",
