@@ -73,11 +73,11 @@ function initCurrentPageHighlight() {
 
     links.forEach(link => {
         const href = link.getAttribute('href');
-        const cleanPath = pathname.replace('.html', '').replace(/\/$/, '') || '/index';
-        const cleanHref = href.replace('.html', '').replace(/\/$/, '') || '/index';
+        const cleanPath = currentPath.toLowerCase().replace('.html', '').replace(/\/$/, '') || '/';
+        const cleanHref = href.toLowerCase().replace('.html', '').replace(/\/$/, '') || '/';
 
         if (cleanPath.endsWith(cleanHref) || 
-            (pathname === '/' && href === 'index.html')) {
+            (currentPath === '/' && href === 'index.html')) {
             link.classList.add('active');
         }
     });
