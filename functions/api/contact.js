@@ -98,33 +98,48 @@ export async function onRequestPost(context) {
       </html>
     `.trim();
 
-    // 4. Send Lead Email via Cloudflare Email Routing
-    const messageId = `<${crypto.randomUUID()}@fluxwebstudio.com>`;
-    const mime = [
-      `Message-ID: ${messageId}`,
-      `Date: ${new Date().toUTCString()}`,
-      `From: "FWS Leads" <${senderAddr}>`,
-      `To: ${internalRecipient}`,
-      `Subject: New Website Enquiry — Flux Web Studio`,
-      `MIME-Version: 1.0`,
-      `Content-Type: text/html; charset="utf-8"`,
-      ``,
-      htmlBody
-    ].join("\r\n");
+    // 4. Send Lead Email via Resend HTTP API
+    const resendApiKey = env.RESEND_API_KEY;
+    const contactToEmail = env.CONTACT_TO_EMAIL || "hello@fluxwebstudio.com";
 
-    const emailMsg = {
-      from: senderAddr,
-      to: internalRecipient,
-      raw: mime
-    };
+    if (!resendApiKey) {
+      console.error("Worker Error: RESEND_API_KEY is not configured.");
+      return new Response(JSON.stringify({ 
+        success: false, 
+        error: "Server configuration error.",
+        details: "API key missing." 
+      }), {
+        status: 500,
+        headers: { ...CORS_HEADERS, "Content-Type": "application/json" }
+      });
+    }
 
-    // Note: env.FWS_EMAIL must be bound in Cloudflare Pages dashboard
-    await env.FWS_EMAIL.send(emailMsg);
-
-    return new Response(JSON.stringify({ success: true, message: "Message sent successfully!" }), {
-      status: 200,
-      headers: { ...CORS_HEADERS, "Content-Type": "application/json" }
+    const resendResponse = await fetch("https://api.resend.com/emails", {
+      method: "POST",
+      headers: {
+        "Authorization": `Bearer ${resendApiKey}`,
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        from: "Flux Web Studio <no-reply@fluxwebstudio.com>",
+        to: [contactToEmail],
+        reply_to: email,
+        subject: `New Website Enquiry — Flux Web Studio`,
+        html: htmlBody
+      })
     });
+
+    const resendResult = await resendResponse.json();
+
+    if (resendResponse.ok) {
+      return new Response(JSON.stringify({ success: true, message: "Message sent successfully!" }), {
+        status: 200,
+        headers: { ...CORS_HEADERS, "Content-Type": "application/json" }
+      });
+    } else {
+      console.error("Resend API Error:", resendResult);
+      throw new Error(resendResult.message || "Failed to send email via Resend.");
+    }
 
   } catch (err) {
     console.error("Worker Error:", err);
