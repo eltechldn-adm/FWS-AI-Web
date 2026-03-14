@@ -37,6 +37,7 @@ export async function onRequestPost(context) {
     const workerUrl = "https://fws-email-worker.eltechldn.workers.dev";
     
     const payload = {
+      // 1. New Worker Contract (Explicit Branching)
       type: 'website_enquiry',
       fullName: name,
       email: email,
@@ -44,7 +45,12 @@ export async function onRequestPost(context) {
       website: website || 'N/A',
       budget: budget || 'N/A',
       subject: subject || 'General Enquiry',
-      message: message
+      message: message,
+
+      // 2. Legacy Worker Contract (Backwards Compatibility)
+      // This ensures 200 OK even if the worker hasn't redeployed the 'type' support yet
+      automationInterest: `Website Enquiry: ${subject}`,
+      workflowDescription: message
     };
 
     console.log(`[API] Attempting worker dispatch to: ${workerUrl}`);
