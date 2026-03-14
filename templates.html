@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script>document.documentElement.classList.add('js-enabled');</script>
+
+    <!-- SEO Meta Tags -->
+    <title>Professional Starter Sites | Flux Web Studio</title>
+    <meta name="description"
+        content="Browse high-performance, simple starter sites built for quick launches and easy management. Professional designs starting at $1,500.">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://fluxwebstudio.com/templates.html">
+
+    <!-- Open Graph / Social Media -->
+    <meta property="og:title" content="Professional Starter Sites | Flux Web Studio">
+    <meta property="og:description"
+        content="Browse high-performance, simple starter sites built for quick launches and easy management. Professional designs ready to go.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://fluxwebstudio.com/templates.html">
+    <meta property="og:image" content="https://fluxwebstudio.com/assets/images/backgrounds/hero-universe-poster.jpg">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Professional Starter Sites | Flux Web Studio">
+    <meta name="twitter:description"
+        content="Browse high-performance, simple starter sites built for quick launches and easy management.">
+    <meta name="twitter:image" content="https://fluxwebstudio.com/assets/images/backgrounds/hero-universe-poster.jpg">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@500;700&display=swap"
+        rel="stylesheet">
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="css/base.css">
+    <link rel="stylesheet" href="css/layout.css">
+    <link rel="stylesheet" href="css/components.css">
+    <link rel="stylesheet" href="css/pages.css">
+    <link rel="stylesheet" href="css/motion.css">
+</head>
+
+<body>
+
+    <!-- Header -->
+    <header class="site-header">
+        <div class="brand-wrapper">
+            <a href="index.html">Flux Web Studio</a>
+        </div>
+        <button class="menu-toggle" aria-label="Toggle Menu">☰</button>
+        <nav class="main-nav">
+            <ul>
+                <li><a href="index.html" class="nav-link">Home</a></li>
+                <li><a href="templates.html" class="nav-link">Starter Sites</a></li>
+                <li><a href="services.html" class="nav-link">Services</a></li>
+                <li><a href="contact.html" class="nav-link">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <!-- Page Hero -->
+        <section class="page-hero" data-scene="hero">
+            <div class="page-hero__bg" style="background-image: url('assets/images/backgrounds/templates-hero.png');">
+            </div>
+            <div class="page-hero__overlay"></div>
+            <div class="page-hero__content">
+                <h1 data-animate="headline">Browse Starter Sites</h1>
+                <p data-animate="copy">Quick-launch, professional designs built for speed and conversion. Pick one,
+                    customize, launch.</p>
+                <div class="cta-row" data-animate="cta">
+                    <a href="#template-grid" class="btn btn-primary">Explore Collection</a>
+                    <a href="contact.html?subject=Template%20Enquiry" class="btn btn-secondary">Get Custom Build</a>
+                </div>
+            </div>
+        </section>
+
+        <div class="container" style="padding-top: 2rem; padding-bottom: 6rem;">
+            <!-- Filter Controls -->
+            <div class="filter-controls"
+                style="display: flex; flex-wrap: wrap; gap: 0.5rem; justify-content: center; margin-bottom: 2rem;">
+                <button class="btn btn-secondary filter-btn active" data-category="all">All Starter Sites</button>
+                <button class="btn btn-secondary filter-btn" data-category="trades">Trades</button>
+                <button class="btn btn-secondary filter-btn" data-category="beauty">Beauty</button>
+                <button class="btn btn-secondary filter-btn" data-category="creative">Creative</button>
+                <button class="btn btn-secondary filter-btn" data-category="professional">Professional</button>
+                <button class="btn btn-secondary filter-btn" data-category="retail">Retail</button>
+                <button class="btn btn-secondary filter-btn" data-category="food">Food</button>
+                <button class="btn btn-secondary filter-btn" data-category="fitness">Fitness</button>
+                <button class="btn btn-secondary filter-btn" data-category="ecommerce">E-commerce</button>
+                <button class="btn btn-secondary filter-btn" data-category="creator">Creator</button>
+            </div>
+
+            <!-- How to Choose Helper -->
+            <div class="card" style="margin-bottom: 3rem; padding: 1.5rem; background: rgba(0,255,157,0.05); text-align: center;">
+                <h3 class="card-title" style="margin-bottom: 1rem; font-size: 1.1rem;">How to Choose:</h3>
+                <div
+                    style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1rem; font-size: 0.9rem; text-align: center;">
+                    <p class="text-muted" style="margin-bottom: 0;"><strong>Want speed?</strong> Trades & Professional are clean and direct.</p>
+                    <p class="text-muted" style="margin-bottom: 0;"><strong>Want premium calm?</strong> Beauty & Wellness has soft, elegant vibes.
+                    </p>
+                    <p class="text-muted" style="margin-bottom: 0;"><strong>Want bold creativity?</strong> Creative Portfolio brings the visual
+                        punch.</p>
+                    <p class="text-muted" style="margin-bottom: 0;"><strong>Want to sell online?</strong> E-commerce has product grids and
+                        checkout flows.</p>
+                </div>
+            </div>
+
+            <!-- Grid (Populated by JS) -->
+            <div id="template-grid" class="grid-3">
+                <!-- Javascript will inject cards here -->
+                <p class="text-center text-muted" style="grid-column: 1/-1;">Loading templates...</p>
+            </div>
+
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="site-footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <h3>Flux Web Studio</h3>
+                    <p class="text-muted">Simple, quick, and easy websites for modern businesses.</p>
+                </div>
+                <nav class="footer-links">
+                    <ul>
+                        <li><a href="templates.html">Starter Sites</a></li>
+                        <li><a href="services.html">Services</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                        <li><a href="privacy.html">Privacy</a></li>
+                        <li><a href="terms.html">Terms</a></li>
+                    </ul>
+                </nav>
+            </div>
+            <div class="copyright">
+                &copy; 2024 Flux Web Studio. All rights reserved.
+            </div>
+        </div>
+    </footer>
+
+    <!-- GSAP for motion system -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+
+    <script src="js/utils.js"></script>
+    <script src="js/main.js"></script>
+    <script src="js/motion.js"></script>
+
+    <style>
+        .filter-btn.active {
+            background-color: var(--white);
+            color: var(--charcoal);
+            border-color: var(--white);
+        }
+    </style>
+</body>
+
+</html>

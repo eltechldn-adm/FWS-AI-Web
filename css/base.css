@@ -1,0 +1,306 @@
+/* ========================================
+   BASE STYLES & DESIGN TOKENS
+   Phase 2: Cinematic + Premium + Retro-Tech
+   ======================================== */
+
+:root {
+    /* ===== COLOR PALETTE ===== */
+    /* Forest Green - Deep, confident, slightly muted */
+    --forest: #0d3b2a;
+    --forest-dark: #082419;
+    --forest-light: #164d37;
+
+    /* Charcoal - Near-black base */
+    --charcoal: #0a0e13;
+    --charcoal-light: #14181f;
+    --charcoal-lighter: #1e242d;
+
+    /* Neutrals */
+    --offwhite: #f4f6f8;
+    --white: #ffffff;
+    --gray-100: #e5e7eb;
+    --gray-400: #9ca3af;
+    --gray-600: #6b7280;
+
+    /* Accent Colors - Muted neon for cinematic feel */
+    --accent-teal: #3dd9c6;
+    --accent-teal-muted: rgba(61, 217, 198, 0.15);
+    --accent-lime: #d4ff00;
+    --accent-lime-muted: rgba(212, 255, 0, 0.1);
+    
+    /* Missing color aliases for compatibility */
+    --accent-cyan: var(--accent-teal);
+    --accent-magenta: #e91e63;
+    --accent-orange: #ff9800;
+
+    /* Semantic Colors */
+    --text-primary: #f4f6f8;
+    --text-secondary: rgba(244, 246, 248, 0.75);
+    --text-tertiary: rgba(244, 246, 248, 0.5);
+    --border-subtle: rgba(244, 246, 248, 0.08);
+    --border-medium: rgba(244, 246, 248, 0.15);
+
+    /* ===== TYPOGRAPHY ===== */
+    /* Retro-tech geometric for headings, clean sans for body */
+    --font-display: 'Space Grotesk', 'Rajdhani', system-ui, sans-serif;
+    --font-body: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+
+    /* Type Scale */
+    --text-xs: 0.75rem;
+    /* 12px */
+    --text-sm: 0.875rem;
+    /* 14px */
+    --text-base: 1rem;
+    /* 16px */
+    --text-lg: 1.125rem;
+    /* 18px */
+    --text-xl: 1.25rem;
+    /* 20px */
+    --text-2xl: 1.5rem;
+    /* 24px */
+    --text-3xl: 2rem;
+    /* 32px */
+    --text-4xl: 2.5rem;
+    /* 40px */
+    --text-5xl: 3rem;
+    /* 48px */
+    --text-6xl: 4rem;
+    /* 64px */
+
+    /* Line Heights */
+    --leading-tight: 1.2;
+    --leading-normal: 1.5;
+    --leading-relaxed: 1.75;
+
+    /* ===== SPACING SCALE ===== */
+    --space-xs: 0.5rem;
+    /* 8px */
+    --space-sm: 0.75rem;
+    /* 12px */
+    --space-md: 1rem;
+    /* 16px */
+    --space-lg: 1.5rem;
+    /* 24px */
+    --space-xl: 2rem;
+    /* 32px */
+    --space-2xl: 3rem;
+    /* 48px */
+    --space-3xl: 4rem;
+    /* 64px */
+    --space-4xl: 6rem;
+    /* 96px */
+
+    /* ===== BORDER RADIUS ===== */
+    --radius-sm: 4px;
+    --radius-md: 8px;
+    --radius-lg: 12px;
+    --radius-xl: 16px;
+    --radius-2xl: 24px;
+    --radius-full: 9999px;
+
+    /* ===== SHADOWS ===== */
+    --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.3);
+    --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.4), 0 2px 4px -1px rgba(0, 0, 0, 0.3);
+    --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.5), 0 4px 6px -2px rgba(0, 0, 0, 0.3);
+    --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.6), 0 10px 10px -5px rgba(0, 0, 0, 0.4);
+    --shadow-glow: 0 0 20px rgba(61, 217, 198, 0.3);
+    --shadow-glow-strong: 0 0 30px rgba(61, 217, 198, 0.5);
+
+    /* ===== GRADIENTS ===== */
+    --gradient-hero: linear-gradient(135deg, var(--charcoal) 0%, var(--forest-dark) 50%, var(--charcoal) 100%);
+    --gradient-section: linear-gradient(180deg, transparent 0%, rgba(13, 59, 42, 0.1) 100%);
+    --gradient-card: linear-gradient(135deg, rgba(255, 255, 255, 0.03) 0%, rgba(255, 255, 255, 0.01) 100%);
+    --gradient-accent: linear-gradient(135deg, var(--accent-teal) 0%, var(--forest-light) 100%);
+
+    /* ===== LAYOUT ===== */
+    --container-width: 1200px;
+    --container-padding: 2rem;
+    --header-height: 80px;
+
+    /* ===== TRANSITIONS ===== */
+    --transition-fast: 150ms ease;
+    --transition-base: 250ms ease;
+    --transition-slow: 350ms ease;
+}
+
+/* ===== RESET ===== */
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+/* ===== BASE STYLES ===== */
+body {
+    background-color: var(--charcoal);
+    color: var(--text-primary);
+    font-family: var(--font-body);
+    font-size: var(--text-base);
+    line-height: var(--leading-normal);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+/* ===== TYPOGRAPHY ===== */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-family: var(--font-display);
+    font-weight: 700;
+    line-height: var(--leading-tight);
+    margin-bottom: var(--space-lg);
+    color: var(--white);
+    letter-spacing: -0.02em;
+}
+
+h1 {
+    font-size: var(--text-6xl);
+    line-height: 1.1;
+}
+
+h2 {
+    font-size: var(--text-4xl);
+}
+
+h3 {
+    font-size: var(--text-2xl);
+}
+
+h4 {
+    font-size: var(--text-xl);
+}
+
+p {
+    margin-bottom: var(--space-md);
+    max-width: 65ch;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+    transition: all var(--transition-base);
+}
+
+ul {
+    list-style: none;
+}
+
+img {
+    max-width: 100%;
+    display: block;
+    height: auto;
+}
+
+button,
+input,
+textarea,
+select {
+    font-family: inherit;
+    font-size: inherit;
+}
+
+/* ===== UTILITIES ===== */
+.container {
+    max-width: var(--container-width);
+    margin: 0 auto;
+    padding: 0 var(--container-padding);
+}
+
+.text-center {
+    text-align: center;
+}
+
+.text-muted {
+    color: var(--text-secondary);
+}
+
+/* Base alignment for sections */
+section {
+    text-align: center;
+}
+
+/* Force centering for headlines and text blocks inside containers */
+.container > *:not(.grid-3) {
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* Prevent FOUC (Flash of Unstyled Content) for animations 
+   We hide elements via JS-driven class so we can precisely control their reveal.
+   If JS fails to run, elements remain visible by default in base CSS. */
+.js-enabled [data-animate] {
+    opacity: 0;
+    will-change: transform, opacity;
+}
+
+/* Force visibility if animations are disabled or for accessibility */
+.js-enabled [data-animate].is-visible {
+    opacity: 1 !important;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .js-enabled [data-animate] {
+        opacity: 1 !important;
+    }
+}
+
+/* ===== RESPONSIVE TYPOGRAPHY ===== */
+@media (max-width: 768px) {
+    :root {
+        --text-6xl: 2.5rem;
+        --text-5xl: 2rem;
+        --text-4xl: 1.75rem;
+        --text-3xl: 1.5rem;
+        --container-padding: 1.5rem;
+    }
+}
+
+/* ===== REDUCED MOTION ===== */
+@media (prefers-reduced-motion: reduce) {
+
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+}
+
+/* ===== PERFORMANCE & SMOOTHING ===== */
+html {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+}
+
+/* Hero fail-safe background to prevent loading flicker */
+.hero-section {
+    background-color: var(--charcoal);
+    background-image: url('../assets/images/backgrounds/hero-universe-poster.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.hero__bg {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+}
+
+.hero__video {
+    opacity: 0;
+    transition: opacity 1.5s ease;
+}
+
+.hero__video.is-loaded {
+    opacity: 1;
+}

@@ -1,0 +1,290 @@
+/* ============================================
+   MOTION SYSTEM - PHASE 4
+   Cinematic scroll animations with GSAP + ScrollTrigger
+   ============================================ */
+
+/* ============================================
+   SCENE CONTAINER
+   Provides relative positioning for parallax layers
+   ============================================ */
+[data-scene] {
+    position: relative;
+    overflow: visible;
+    /* Allow parallax to overflow slightly */
+}
+
+/* ============================================
+   PARALLAX LAYERS
+   Decorative background/overlay layers for depth
+   ============================================ */
+.scene__bg,
+[data-parallax="bg"],
+[data-parallax="overlay"] {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    /* Never block clicks */
+    z-index: 0;
+}
+
+.scene__bg {
+    background: linear-gradient(180deg,
+            rgba(0, 0, 0, 0.05) 0%,
+            rgba(0, 0, 0, 0.02) 100%);
+}
+
+[data-parallax="overlay"] {
+    z-index: 1;
+}
+
+/* Ensure content is above parallax layers */
+.container {
+    position: relative;
+    z-index: 2;
+}
+
+/* ============================================
+   FILM GRAIN OVERLAY (SUBTLE)
+   ============================================ */
+.hero-section::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image: url('data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="300" height="300"%3E%3Cfilter id="n"%3E%3CfeTurbulence baseFrequency="0.9" numOctaves="4"/%3E%3C/filter%3E%3Crect width="300" height="300" filter="url(%23n)" opacity="0.05"/%3E%3C/svg%3E');
+    opacity: 0.3;
+    mix-blend-mode: overlay;
+    pointer-events: none;
+    z-index: 1;
+}
+
+/* ============================================
+   PERFORMANCE OPTIMIZATIONS
+   Elements with data-animate start visible - GSAP will animate them
+   DO NOT set opacity: 0 here - ensures content visible if JS fails
+   ============================================ */
+
+/* ============================================
+   RESPONSIVE MOTION ADJUSTMENTS
+   Parallax intensity reduced by JavaScript on tablet/mobile
+   ============================================ */
+
+/* Mobile: Minimal or no parallax */
+@media (max-width: 640px) {
+    .scene__bg {
+        background: transparent;
+    }
+}
+
+/* ============================================
+   REDUCED MOTION SUPPORT
+   Critical for accessibility
+   ============================================ */
+@media (prefers-reduced-motion: reduce) {
+
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
+
+    /* Ensure all content is visible */
+    [data-animate] {
+        opacity: 1 !important;
+        transform: none !important;
+    }
+
+    /* Disable parallax layers */
+    .scene__bg,
+    [data-parallax="bg"],
+    [data-parallax="overlay"] {
+        transform: none !important;
+        display: none;
+    }
+}
+
+/* Class-based reduced motion (JS detection fallback) */
+.reduced-motion [data-animate],
+.reduced-motion .scene__bg,
+.reduced-motion [data-parallax] {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+    animation: none !important;
+}
+
+/* ============================================
+   CARD TILT HOVER (Templates Page)
+   CSS fallback, enhanced by JS
+   ============================================ */
+@media (hover: hover) and (pointer: fine) {
+    .card {
+        transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+
+    .card:hover {
+        transform: translateY(-4px) scale(1.01);
+    }
+}
+
+/* Disable hover effects on touch devices */
+@media (hover: none) {
+    .card:hover {
+        transform: none;
+    }
+}
+
+/* ============================================
+   SCROLL CUE (Optional)
+   Subtle indicator for scroll
+   ============================================ */
+.scroll-cue {
+    position: absolute;
+    bottom: 2rem;
+    left: 50%;
+    transform: translateX(-50%);
+    opacity: 0.6;
+    animation: scrollPulse 2s ease-in-out infinite;
+    pointer-events: none;
+    z-index: 10;
+}
+
+@keyframes scrollPulse {
+
+    0%,
+    100% {
+        opacity: 0.3;
+        transform: translateX(-50%) translateY(0);
+    }
+
+    50% {
+        opacity: 0.6;
+        transform: translateX(-50%) translateY(8px);
+    }
+}
+
+/* Disable on reduced motion */
+@media (prefers-reduced-motion: reduce) {
+    .scroll-cue {
+        animation: none;
+        opacity: 0.4;
+    }
+}
+
+.reduced-motion .scroll-cue {
+    animation: none;
+    opacity: 0.4;
+}
+
+/* ============================================
+   PHASE E: HIGH DYNAMICS MOTION SYSTEM
+   Enhanced micro-interactions and hover effects
+   ============================================ */
+
+/* Button Hover: Lift + Glow Edge */
+.btn {
+    position: relative;
+    transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1),
+        box-shadow 0.2s ease;
+    will-change: transform;
+}
+
+.btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 24px rgba(61, 217, 198, 0.3),
+        0 0 0 1px rgba(61, 217, 198, 0.5);
+}
+
+.btn:active {
+    transform: translateY(-1px);
+}
+
+/* Card Hover: Tilt (Desktop) + Shine Sweep */
+@media (hover: hover) and (pointer: fine) {
+    .card {
+        position: relative;
+        overflow: hidden;
+        transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1),
+            box-shadow 0.4s ease;
+    }
+
+    .card::before {
+        content: '';
+        position: absolute;
+        top: -50%;
+        left: -50%;
+        width: 200%;
+        height: 200%;
+        background: linear-gradient(120deg,
+                transparent 0%,
+                rgba(61, 217, 198, 0.1) 50%,
+                transparent 100%);
+        transform: translateX(-100%) translateY(-100%) rotate(45deg);
+        transition: transform 0.6s ease;
+        pointer-events: none;
+        z-index: 1;
+    }
+
+    .card:hover {
+        transform: translateY(-6px) rotateX(2deg) rotateY(1deg);
+        box-shadow: 0 12px 32px rgba(0, 0, 0, 0.4),
+            0 0 0 1px rgba(61, 217, 198, 0.2);
+    }
+
+    .card:hover::before {
+        transform: translateX(100%) translateY(100%) rotate(45deg);
+    }
+
+    /* Ensure card content stays above shine */
+    .card>* {
+        position: relative;
+        z-index: 2;
+    }
+}
+
+/* Disable advanced hover on touch devices */
+@media (hover: none) {
+    .card:hover {
+        transform: none;
+    }
+
+    .card::before {
+        display: none;
+    }
+}
+
+/* Form Input Focus Glow */
+input:focus,
+textarea:focus,
+select:focus {
+    outline: none;
+    border-color: var(--accent-cyan);
+    box-shadow: 0 0 0 3px rgba(61, 217, 198, 0.15),
+        0 4px 12px rgba(61, 217, 198, 0.2);
+}
+
+/* Disable motion enhancements for reduced motion */
+@media (prefers-reduced-motion: reduce) {
+
+    .btn:hover,
+    .card:hover {
+        transform: none !important;
+    }
+
+    .card::before {
+        display: none;
+    }
+}
+
+.reduced-motion .btn:hover,
+.reduced-motion .card:hover {
+    transform: none !important;
+}
+
+.reduced-motion .card::before {
+    display: none;
+}
