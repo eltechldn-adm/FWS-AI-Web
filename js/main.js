@@ -7,12 +7,19 @@ document.addEventListener('DOMContentLoaded', () => {
     initNavigation();
     initCurrentPageHighlight();
 
-    // Detect current page
+    // Detect current page with robust normalization for live/Cloudflare env
     const currentPage = document.body.getAttribute('data-page');
     const pathname = window.location.pathname;
+    const cleanPath = pathname.toLowerCase().replace('.html', '').replace(/\/$/, '') || '/';
+
+    // Page Specific Constants
+    const isHome = currentPage === 'home' || cleanPath === '/' || cleanPath === '/index';
+    const isTemplates = cleanPath.endsWith('/templates');
+    const isTemplateDetail = cleanPath.endsWith('/template');
+    const isServices = cleanPath.endsWith('/services');
 
     // Initialize motion system (Phase 4)
-    if (currentPage === 'home' || pathname.endsWith('index.html') || pathname === '/' || pathname.endsWith('/')) {
+    if (isHome) {
         // Handle video playback based on reduced motion/mobile
         if (typeof handleVideoPlayback === 'function') {
             handleVideoPlayback();
@@ -25,7 +32,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // Starter Sites (Templates) page
-    if (pathname.includes('/templates') || pathname.endsWith('templates.html')) {
+    if (isTemplates) {
         initTemplateFilter();
 
         // Add card tilt effect (Phase 4)
@@ -36,12 +43,12 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // Template detail page
-    if (pathname.includes('/template/') || pathname.endsWith('template.html') || pathname.includes('template?')) {
+    if (isTemplateDetail) {
         initTemplateDetail();
     }
 
     // Services page - Init FAQ Accordion (Phase C)
-    if (pathname.includes('/services') || pathname.endsWith('services.html')) {
+    if (isServices) {
         initFAQAccordion();
     }
 });

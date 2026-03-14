@@ -585,7 +585,8 @@ function animatePageHero(heroEl) {
 // Auto-initialize universal motion on non-home pages
 document.addEventListener('DOMContentLoaded', () => {
     const pathname = window.location.pathname;
-    const isHomePage = pathname.endsWith('index.html') || pathname === '/' || pathname.endsWith('/');
+    const cleanPath = pathname.toLowerCase().replace('.html', '').replace(/\/$/, '') || '/';
+    const isHomePage = cleanPath === '/' || cleanPath === '/index';
 
     // Don't run on home page (it has its own initHomeMotion)
     if (!isHomePage) {
