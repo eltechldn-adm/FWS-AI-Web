@@ -12,7 +12,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const pathname = window.location.pathname;
 
     // Initialize motion system (Phase 4)
-    if (currentPage === 'home' || pathname.includes('index.html') || pathname === '/') {
+    if (currentPage === 'home' || pathname.endsWith('index.html') || pathname === '/' || pathname.endsWith('/')) {
         // Handle video playback based on reduced motion/mobile
         if (typeof handleVideoPlayback === 'function') {
             handleVideoPlayback();
@@ -24,8 +24,8 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    // Templates page
-    if (pathname.includes('templates.html')) {
+    // Starter Sites (Templates) page
+    if (pathname.includes('/templates') || pathname.endsWith('templates.html')) {
         initTemplateFilter();
 
         // Add card tilt effect (Phase 4)
@@ -36,12 +36,12 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // Template detail page
-    if (pathname.includes('template.html')) {
+    if (pathname.includes('/template/') || pathname.endsWith('template.html') || pathname.includes('template?')) {
         initTemplateDetail();
     }
 
     // Services page - Init FAQ Accordion (Phase C)
-    if (pathname.includes('services.html')) {
+    if (pathname.includes('/services') || pathname.endsWith('services.html')) {
         initFAQAccordion();
     }
 });
@@ -65,8 +65,12 @@ function initCurrentPageHighlight() {
     const currentPath = window.location.pathname;
 
     links.forEach(link => {
-        if (link.getAttribute('href') === currentPath.split('/').pop() ||
-            (currentPath === '/' && link.getAttribute('href') === 'index.html')) {
+        const href = link.getAttribute('href');
+        const cleanPath = pathname.replace('.html', '').replace(/\/$/, '') || '/index';
+        const cleanHref = href.replace('.html', '').replace(/\/$/, '') || '/index';
+
+        if (cleanPath.endsWith(cleanHref) || 
+            (pathname === '/' && href === 'index.html')) {
             link.classList.add('active');
         }
     });
